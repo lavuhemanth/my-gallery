@@ -29,13 +29,6 @@ class Main extends Component {
     this.setState({ gallery });
   };
 
-  componentDidMount() {
-    // if (!this.props.isAuth) {
-    //   console.log("Load For first Time :: ", this.props.isAuth);
-    //   this.props.history.Push("/login");
-    // }
-  }
-
   filterGallery = () => {
     const { gallery, filterOptions } = this.state;
     if (filterOptions.searchText.length > 3) {
@@ -75,7 +68,6 @@ class Main extends Component {
 
   handleSorting = (typeOfSort) => {
     let { gallery, filter, isSortBy } = this.state;
-    console.log("Sort Type :: ", typeOfSort);
     const sortArray = filter.length
       ? filter.sort((item1, item2) => this.sorting(item1, item2))
       : gallery.sort((item1, item2) => this.sorting(item1, item2));
@@ -85,7 +77,7 @@ class Main extends Component {
 
   render() {
     const { filterOptions, filter, gallery, isSortBy } = this.state;
-    console.log("Props in main component :: ", this.props);
+
     return (
       <>
         <Header {...this.props} />

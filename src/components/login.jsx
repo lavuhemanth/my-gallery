@@ -45,10 +45,10 @@ class Login extends Component {
     return error ? error.details[0].message : null;
   };
 
-  componentDidMount() {
-    auth.login(() => {
+  componentDidUpdate() {
+    if (auth.isAuthorized()) {
       this.props.history.push("/home");
-    });
+    }
   }
 
   handleSubmit = (e) => {
