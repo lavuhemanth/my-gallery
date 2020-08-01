@@ -1,13 +1,101 @@
-body {
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+* {
+  transition: all 300ms ease-in-out;
+  margin: 0px;
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+.floating-btn {
+  position: fixed;
+  bottom: 40px;
+  right: 60px;
+  z-index: 999;
+}
+
+.theme-bg {
+  background-color: #44bc9b !important;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+}
+
+.title {
+  font-size: 28px;
+  display: inline-block;
+  align-items: baseline;
+  font-weight: 300;
+  line-height: 1;
+  letter-spacing: 2px;
+}
+.theme {
+  color: white;
+  background-color: #44bc9b !important;
+}
+
+.title-color {
+  color: white !important;
+}
+.title-color h1 {
+  text-transform: uppercase;
+}
+.title > span {
+  text-transform: capitalize;
+}
+.gender-btn {
+  outline: none;
+  cursor: pointer;
+}
+
+.active,
+.gender-btn:hover {
+  background-color: #44bc9b !important;
+  color: white !important;
+}
+
+.theme-color {
+  color: #44bc9b;
+}
+.mt-20p {
+  margin-top: 20%;
+}
+
+.mb-50p {
+  margin-bottom: 50%;
+}
+.cursor {
+  cursor: pointer;
+}
+@media (max-width: 575.98px) {
+  .container {
+    margin: 0 auto;
+    width: 100%;
+  }
+}
+
+@media (min-width: 576px) and (max-width: 767.98px) {
+  .container {
+    margin: 0 auto;
+    width: 100%;
+  }
+}
+
+@media (min-width: 768px) and (max-width: 991.98px) {
+  .container {
+    margin: 0 auto;
+    width: 768px;
+  }
+}
+
+@media (min-width: 992px) and (max-width: 1199.98px) {
+  .container {
+    margin: 0 auto;
+    width: 768px;
+  }
+}
+
+@media (min-width: 1200px) {
+  .container {
+    margin: 0 auto;
+    width: 476px;
+  }
 }
