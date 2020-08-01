@@ -45,7 +45,11 @@ class Login extends Component {
     return error ? error.details[0].message : null;
   };
 
-  componentDidMount() {}
+  componentDidMount() {
+    auth.login(() => {
+      this.props.history.push("/home");
+    });
+  }
 
   handleSubmit = (e) => {
     e.preventDefault();
@@ -56,14 +60,16 @@ class Login extends Component {
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(this.state.account),
     };
-    fetch("http://localhost:3080/api/login", requestOptions)
+    fetch(`https://demo-my-gallery.herokuapp.com/api/login`, requestOptions)
       .then(async (response) => {
         const data = await response.json();
         console.log(" :: Login Success :: ");
-        localStorage.setItem("token", data.token);
-        auth.login(() => {
-          this.props.history.push("/home");
-        });
+        if (data.token) {
+          localStorage.setItem("token", data.token);
+          auth.login(() => {
+            this.props.history.push("/home");
+          });
+        }
         // this.props.handleAuthUser();
       })
       .catch((error) => {

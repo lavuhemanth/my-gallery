@@ -21,14 +21,14 @@ const Header = (props) => {
         <span>My Gallery</span>
       </Link>
       <button
-        className="btn btn-light title-color"
+        className="btn btn-link title-color"
         onClick={() =>
           auth.logOut(() => {
             props.history.push("/");
           })
         }
       >
-        LogOff
+        Logout
       </button>
     </nav>
   );

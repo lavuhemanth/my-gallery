@@ -74,7 +74,7 @@ class Register extends Component {
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(this.state.user),
     };
-    fetch("http://localhost:3080/api/users", requestOptions)
+    fetch(`https://demo-my-gallery.herokuapp.com/api/users`, requestOptions)
       .then(async (response) => {
         const data = await response.json();
         if (data) {
