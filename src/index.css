@@ -3,6 +3,14 @@
   margin: 0px;
 }
 
+.card {
+  transition: transform 0.2s;
+}
+
+.card:hover {
+  transform: scale(1.1);
+}
+
 .floating-btn {
   position: fixed;
   bottom: 40px;

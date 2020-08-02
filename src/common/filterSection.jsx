@@ -9,9 +9,17 @@ const FilterSection = ({
   searchText,
   handleSorting,
 }) => {
+  const user = JSON.parse(localStorage.getItem("user"));
+  console.log("User :: ", user);
   return (
     <div className="row m-3 align-items-right">
-      <div className="col-sm-12 row align-items-center justify-content-end">
+      <div className="col-sm-2">
+        hi{" "}
+        <strong className="text-capitalize">
+          <q>{user.firstName}</q>
+        </strong>
+      </div>
+      <div className="col-sm-10 row align-items-center justify-content-end">
         <span>
           <Filter size="2em" className="theme-color" />
         </span>

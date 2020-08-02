@@ -88,18 +88,18 @@ class Main extends Component {
           handleInput={this.handleInput}
           handleSorting={(typeOfSort) => this.handleSorting(typeOfSort)}
         />
-        <div className="row m-3 align-items-center">
+        <div className="row my-4 mx-3 align-items-center">
           {filter.length
             ? filter.map((data) => {
                 return (
-                  <div className="col-sm-4 mb-3" key={data.id}>
+                  <div className="col-sm-3 mb-3" key={data.id}>
                     <ImageCard {...data} onClickLike={this.onClickLike} />
                   </div>
                 );
               })
             : gallery.map((data) => {
                 return (
-                  <div className="col-sm-4 mb-3" key={data.id}>
+                  <div className="col-sm-3 mb-3" key={data.id}>
                     <ImageCard {...data} onClickLike={this.onClickLike} />
                   </div>
                 );

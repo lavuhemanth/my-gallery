@@ -66,12 +66,14 @@ class Login extends Component {
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(this.state.account),
     };
+    // https://demo-my-gallery.herokuapp.com
     fetch(`https://demo-my-gallery.herokuapp.com/api/login`, requestOptions)
       .then(async (response) => {
         const data = await response.json();
         console.log(" :: Login Success :: ");
         if (data.token) {
           localStorage.setItem("token", data.token);
+          localStorage.setItem("user", data.user);
           auth.login(() => {
             this.props.history.push("/home");
           });

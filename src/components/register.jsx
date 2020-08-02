@@ -80,6 +80,7 @@ class Register extends Component {
         if (data) {
           console.log("data :: ", data);
           localStorage.setItem("token", data.token);
+          localStorage.setItem("user", data.user);
           auth.login(() => {
             this.props.history.push("/home");
           });
