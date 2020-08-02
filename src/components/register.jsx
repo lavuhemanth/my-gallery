@@ -65,6 +65,11 @@ class Register extends Component {
     return age;
   };
 
+  componentDidUpdate() {
+    if (localStorage.getItem("token")) {
+      this.props.history.push("/home");
+    }
+  }
   handleSubmit = (e) => {
     e.preventDefault();
     const errors = this.validate();
@@ -88,8 +93,8 @@ class Register extends Component {
           throw new Error(error.error);
         }
       })
-      .then(async (response) => {
-        const data = await response.json();
+      .then((response) => {
+        const data = response;
         this.setState({ ...this.state, isLoading: false });
         if (data) {
           console.log("data :: ", data);
@@ -195,7 +200,7 @@ class Register extends Component {
                 <div className="form-control p-0 col-5 ">
                   <input
                     ref={this.genderMaleRef}
-                    id="gender"
+                    id="genders"
                     type="button"
                     name="gender"
                     className={
