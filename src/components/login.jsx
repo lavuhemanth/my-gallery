@@ -45,8 +45,14 @@ class Login extends Component {
     return error ? error.details[0].message : null;
   };
 
+  componentDidMount() {
+    if (localStorage.getItem("token")) {
+      this.props.history.push("/home");
+    }
+  }
+
   componentDidUpdate() {
-    if (auth.isAuthorized()) {
+    if (localStorage.getItem("token")) {
       this.props.history.push("/home");
     }
   }
@@ -94,7 +100,7 @@ class Login extends Component {
         <div className="container">
           <div className="text-center m-4">
             <div className="mt-20p mb-50p title-color">
-              <h1 className="m-0">PWA</h1>
+              <h1 className="m-0 title">MyGallery</h1>
               <span>catchphrase</span>
             </div>
             <form onSubmit={this.handleSubmit} className="mb-5">

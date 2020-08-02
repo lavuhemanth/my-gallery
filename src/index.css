@@ -21,7 +21,7 @@
 
 .title {
   font-size: 28px;
-  display: inline-block;
+  /* display: inline-block; */
   align-items: baseline;
   font-weight: 300;
   line-height: 1;
@@ -70,6 +70,9 @@
     margin: 0 auto;
     width: 100%;
   }
+  .title {
+    font-size: 24px !important;
+  }
 }
 
 @media (min-width: 576px) and (max-width: 767.98px) {
@@ -77,12 +80,19 @@
     margin: 0 auto;
     width: 100%;
   }
+
+  .title {
+    font-size: 24px !important;
+  }
 }
 
 @media (min-width: 768px) and (max-width: 991.98px) {
   .container {
     margin: 0 auto;
     width: 768px;
+  }
+  .login-title {
+    font-size: 26px !important;
   }
 }
 
@@ -97,5 +107,8 @@
   .container {
     margin: 0 auto;
     width: 476px;
+  }
+  .title {
+    font-size: 28px !important;
   }
 }
