@@ -101,6 +101,7 @@ class Register extends Component {
         }
       })
       .catch((error) => {
+        this.showErrorMessage();
         this.setState({ errorMessage: error.toString(), isLoading: false });
       });
   };
