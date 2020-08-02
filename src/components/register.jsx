@@ -3,7 +3,9 @@ import InputField from "../common/inputField";
 import Joi from "joi";
 import { Link } from "react-router-dom";
 import auth from "../auth";
+import Spinner from "../common/spinner";
 
+let timer = null;
 class Register extends Component {
   genderMaleRef = React.createRef();
   genderFemaleRef = React.createRef();
@@ -19,6 +21,7 @@ class Register extends Component {
     },
     errors: {},
     errorMessage: "",
+    isLoading: false,
   };
 
   componentDidMount() {}
@@ -74,9 +77,20 @@ class Register extends Component {
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(this.state.user),
     };
+    this.setState({ ...this.state, isLoading: true });
     fetch(`https://demo-my-gallery.herokuapp.com/api/users`, requestOptions)
       .then(async (response) => {
+        if (response.ok) {
+          return await response.json();
+        } else {
+          const error = await response.json();
+
+          throw new Error(error.error);
+        }
+      })
+      .then(async (response) => {
         const data = await response.json();
+        this.setState({ ...this.state, isLoading: false });
         if (data) {
           console.log("data :: ", data);
           localStorage.setItem("token", data.token);
@@ -87,7 +101,7 @@ class Register extends Component {
         }
       })
       .catch((error) => {
-        this.setState({ errorMessage: error.toString() });
+        this.setState({ errorMessage: error.toString(), isLoading: false });
       });
   };
 
@@ -115,8 +129,18 @@ class Register extends Component {
     this.setState({ user });
   };
 
+  showErrorMessage = () => {
+    timer = setTimeout(() => {
+      this.setState({ errorMessage: "" });
+    }, 3000);
+  };
+
+  componentWillUnmount() {
+    clearTimeout(timer);
+  }
+
   render() {
-    const { user, errors } = this.state;
+    const { user, errors, isLoading, errorMessage } = this.state;
     return (
       <>
         <div className="container">
@@ -225,12 +249,16 @@ class Register extends Component {
               <Link to="/login">Login ?</Link>
             </small>
           </div>
-          {/* {errorMessage.length > 0 ? (
-            <HandleError message={errorMessage} />
+          {/* {isLoading && <Spinner />} */}
+          {errorMessage.length ? (
+            <div className="alert alert-danger m-2" role="alert">
+              {errorMessage}
+            </div>
           ) : (
-            <HandleSuccess message="User Created" />
-          )} */}
+            <></>
+          )}
         </div>
+        {isLoading && <Spinner />}
       </>
     );
   }

@@ -13,6 +13,7 @@ class Auth {
 
   logOut(callback) {
     localStorage.removeItem("token");
+    localStorage.removeItem("user");
     this.authenticated = false;
     console.log("Authorised :: ", this.authenticated);
     callback();

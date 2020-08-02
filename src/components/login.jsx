@@ -3,7 +3,9 @@ import InputField from "../common/inputField";
 import Joi from "joi";
 import { Link } from "react-router-dom";
 import auth from "../auth";
+import Spinner from "../common/spinner";
 
+let timer = null;
 class Login extends Component {
   username = React.createRef();
 
@@ -13,6 +15,8 @@ class Login extends Component {
       password: "",
     },
     errors: {},
+    isLoading: false,
+    errorMessage: "",
   };
 
   accountSchema = {
@@ -66,11 +70,21 @@ class Login extends Component {
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(this.state.account),
     };
+    this.setState({ isLoading: true });
     // https://demo-my-gallery.herokuapp.com
     fetch(`https://demo-my-gallery.herokuapp.com/api/login`, requestOptions)
       .then(async (response) => {
-        const data = await response.json();
-        console.log(" :: Login Success :: ");
+        if (response.ok) {
+          return await response.json();
+        } else {
+          const error = await response.json();
+
+          throw new Error(error.error);
+        }
+      })
+      .then((response) => {
+        const data = response;
+        this.setState({ isLoading: false });
         if (data.token) {
           localStorage.setItem("token", data.token);
           localStorage.setItem("user", data.user);
@@ -81,7 +95,8 @@ class Login extends Component {
         // this.props.handleAuthUser();
       })
       .catch((error) => {
-        this.setState({ errorMessage: error.toString() });
+        this.setState({ isLoading: false, errorMessage: error.toString() });
+        this.showErrorMessage();
       });
     console.log("submitted :: ", this.state.account);
   };
@@ -95,8 +110,18 @@ class Login extends Component {
     this.setState({ account, errors });
   };
 
+  showErrorMessage = () => {
+    timer = setTimeout(() => {
+      this.setState({ errorMessage: "" });
+    }, 3000);
+  };
+
+  componentWillUnmount() {
+    clearTimeout(timer);
+  }
+
   render() {
-    const { account, errors } = this.state;
+    const { account, errors, isLoading, errorMessage } = this.state;
     return (
       <div className="theme-bg ">
         <div className="container">
@@ -137,7 +162,15 @@ class Login extends Component {
               <Link to="/signup">Signup</Link> <i>first ?</i>
             </small>
           </div>
+          {errorMessage.length ? (
+            <div className="alert alert-danger m-2" role="alert">
+              {errorMessage}
+            </div>
+          ) : (
+            <></>
+          )}
         </div>
+        {isLoading && <Spinner />}
       </div>
     );
   }

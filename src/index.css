@@ -3,6 +3,17 @@
   margin: 0px;
 }
 
+.loading {
+  position: fixed;
+  z-index: 1000;
+  top: 0;
+  left: 0;
+  opacity: 0.6;
+  background-color: black;
+  right: 0;
+  bottom: 0;
+}
+
 .card {
   transition: transform 0.2s;
 }
@@ -69,6 +80,9 @@
 
 .mb-50p {
   margin-bottom: 50%;
+}
+.mt-60p {
+  margin-top: 60%;
 }
 .cursor {
   cursor: pointer;
